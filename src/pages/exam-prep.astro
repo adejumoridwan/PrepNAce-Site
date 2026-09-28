@@ -1,0 +1,22 @@
+---
+import { ArrowRight, ChartNoAxesColumnIncreasing, Info, ClipboardCheck, Layers } from "@lucide/astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site.js";
+
+const exams = ["JAMB", "WAEC", "NECO", "POST-UTME", "General CBT preparation"];
+const methods = [
+  { title: "Past-question practice", text: "Build familiarity with question styles and practise applying what you know.", icon: ClipboardCheck },
+  { title: "Topic-based learning", text: "Focus revision around specific subjects and topics to make study sessions more useful.", icon: Layers },
+  { title: "Performance tracking", text: "Review practice results to notice progress and identify areas for more attention.", icon: ChartNoAxesColumnIncreasing },
+  { title: "Explanations & resources", text: "Strengthen understanding with clear explanations and supporting study materials.", icon: Info },
+];
+---
+
+<Layout title="Exam Preparation | PrepNAce" description="Prepare for JAMB, WAEC, NECO, POST-UTME and CBT examinations with focused practice and useful study resources.">
+  <main class="site-container py-14 md:py-20">
+    <header class="max-w-3xl border-l-2 border-accent pl-6"><p class="text-xs font-semibold uppercase tracking-[0.12em] text-primary dark:text-primary-light">Exam Preparation</p><h1 class="mt-3 font-brand text-5xl leading-tight text-neutral-900 dark:text-white">Prepare with a plan, not guesswork.</h1><p class="mt-5 text-base leading-8 text-neutral-600 dark:text-neutral-300">Build knowledge and confidence for JAMB, WAEC, NECO, POST-UTME and general computer-based tests. PrepNAce brings practice and learning resources together to support consistent preparation.</p></header>
+    <section class="mt-10 flex flex-wrap gap-2">{exams.map((exam) => <span class="border border-primary/20 bg-white px-3 py-2 text-sm font-medium text-primary dark:bg-bg-secondary-dark dark:text-primary-light">{exam}</span>)}</section>
+    <section class="mt-14 grid gap-4 sm:grid-cols-2">{methods.map(({ title, text, icon: Icon }) => <article class="flex gap-4 border border-neutral-200 p-5 dark:border-neutral-700"><Icon class="mt-0.5 shrink-0 text-primary dark:text-primary-light" size={22} /><div><h2 class="font-semibold text-neutral-900 dark:text-white">{title}</h2><p class="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">{text}</p></div></article>)}</section>
+    <section class="mt-14 grid items-center gap-8 border-y border-primary/15 py-8 md:grid-cols-[1fr_auto]"><div><p class="text-xs font-semibold uppercase tracking-[0.12em] text-primary dark:text-primary-light">Study anywhere</p><h2 class="mt-2 font-brand text-3xl text-neutral-900 dark:text-white">PrepNAce Mobile App</h2><p class="mt-2 max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-300">Practice JAMB, WAEC and NECO past questions, study by subject and topic, identify weaker areas and track your performance.</p></div><a href={siteConfig.products[0].url} class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white">Explore the PrepNAce App <ArrowRight size={16} /></a></section>
+  </main>
+</Layout>

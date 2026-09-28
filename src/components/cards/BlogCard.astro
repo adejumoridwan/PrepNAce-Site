@@ -6,6 +6,7 @@ const {
   description,
   publishDate,
   tags = [] as string[],
+  category,
   img,
   img_alt,
   slug,
@@ -101,11 +102,11 @@ const isHorizontal = layout === "horizontal";
         {formattedDate}
       </time>
 
-      {tags && tags.length > 0 && (
+      {(category || (tags && tags.length > 0)) && (
         <>
           <span class="text-neutral-400 dark:text-neutral-500">·</span>
           <span class="inline-flex items-center rounded-full bg-bg-secondary/8 dark:bg-bg-secondary/15 px-3 py-1 text-[11px] font-light text-primary/75 dark:text-primary-light/85 border border-primary/25 dark:border-primary/25">
-            {tags[0]}
+            {category || tags[0]}
           </span>
         </>
       )}

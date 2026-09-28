@@ -1,0 +1,89 @@
+---
+import { Download, ExternalLink, FileText, Search, X } from "@lucide/astro";
+import Layout from "@/layouts/Layout.astro";
+import { resources } from "@/data/resources.js";
+
+const subjects = [...new Set(resources.map((resource) => resource.subject))].sort();
+const topics = [...new Set(resources.map((resource) => resource.topic))].sort();
+---
+
+<Layout title="Study Resources | PrepNAce" description="Browse PrepNAce study resources by subject, topic or search.">
+  <main class="site-container py-14 md:py-20">
+    <header class="max-w-3xl"><p class="text-xs font-semibold uppercase tracking-[0.12em] text-primary dark:text-primary-light">Study library</p><h1 class="mt-3 font-brand text-5xl text-neutral-900 dark:text-white">Learning Resources</h1><p class="mt-5 text-base leading-8 text-neutral-600 dark:text-neutral-300">Find useful study materials organized by subject and topic. Resource links are shareable and PDFs can be opened or downloaded directly.</p></header>
+    <form id="resource-filters" class="mt-10 grid gap-3 border-y border-neutral-200 py-5 dark:border-neutral-700 sm:grid-cols-[1fr_190px_190px_auto]" role="search">
+      <label class="relative"><span class="sr-only">Search resource titles</span><Search size={17} class="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" /><input id="resource-search" type="search" placeholder="Search resources" class="w-full border border-neutral-300 bg-white py-3 pl-10 pr-3 text-sm text-neutral-800 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-neutral-700 dark:bg-bg-secondary-dark dark:text-neutral-100" /></label>
+      <label><span class="sr-only">Filter by subject</span><select id="resource-subject" class="w-full border border-neutral-300 bg-white px-3 py-3 text-sm text-neutral-800 outline-none focus:border-primary dark:border-neutral-700 dark:bg-bg-secondary-dark dark:text-neutral-100"><option value="">All subjects</option>{subjects.map((subject) => <option value={subject}>{subject}</option>)}</select></label>
+      <label><span class="sr-only">Filter by topic</span><select id="resource-topic" class="w-full border border-neutral-300 bg-white px-3 py-3 text-sm text-neutral-800 outline-none focus:border-primary dark:border-neutral-700 dark:bg-bg-secondary-dark dark:text-neutral-100"><option value="">All topics</option>{topics.map((topic) => <option value={topic}>{topic}</option>)}</select></label>
+      <button id="clear-resource-filters" type="button" class="inline-flex items-center justify-center gap-2 border border-neutral-300 px-4 py-3 text-sm font-medium text-neutral-700 hover:border-primary hover:text-primary dark:border-neutral-700 dark:text-neutral-200"><X size={15} /> Clear</button>
+    </form>
+    <p id="resource-count" class="mt-6 text-sm text-neutral-500 dark:text-neutral-400" aria-live="polite"></p>
+    <section id="resource-results" class="mt-4 grid gap-4 md:grid-cols-2" aria-label="Study resources">
+      {resources.map((resource) => <article class="resource-card flex flex-col border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-bg-secondary-dark" data-title={resource.title.toLowerCase()} data-subject={resource.subject} data-topic={resource.topic}>
+        <div class="flex items-start justify-between gap-3"><span class="text-xs font-medium text-primary dark:text-primary-light">{resource.subject} · {resource.topic}</span><span class="inline-flex items-center gap-1 border border-accent/70 px-2 py-1 text-[11px] text-neutral-700 dark:text-accent-light"><FileText size={13} /> PDF</span></div>
+        <h2 class="mt-4 font-semibold text-neutral-900 dark:text-white">{resource.title}</h2><p class="mt-2 flex-1 text-sm leading-6 text-neutral-600 dark:text-neutral-300">{resource.description}</p>
+        <div class="mt-5 flex flex-wrap gap-4"><a href={`/resources/${resource.slug}/`} class="text-sm font-semibold text-primary dark:text-primary-light">Details</a><a href={resource.file} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm font-semibold text-primary dark:text-primary-light">Open Resource <ExternalLink size={14} /></a><a href={resource.file} download class="inline-flex items-center gap-1 text-sm font-semibold text-neutral-600 dark:text-neutral-300">Download PDF <Download size={14} /></a></div>
+      </article>)}
+    </section>
+    <div id="resource-empty" hidden class="border border-dashed border-neutral-300 px-6 py-12 text-center dark:border-neutral-700"><FileText size={24} class="mx-auto text-accent" /><h2 class="mt-4 font-semibold text-neutral-900 dark:text-white">No resources found.</h2><p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300">No resources match your current filters.</p><button id="empty-clear-filters" type="button" class="mt-4 text-sm font-semibold text-primary underline underline-offset-4 dark:text-primary-light">Clear Filters</button></div>
+  </main>
+</Layout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#resource-filters");
+  const search = document.querySelector<HTMLInputElement>("#resource-search");
+  const subject = document.querySelector<HTMLSelectElement>("#resource-subject");
+  const topic = document.querySelector<HTMLSelectElement>("#resource-topic");
+  const cards = [...document.querySelectorAll<HTMLElement>(".resource-card")];
+  const empty = document.querySelector<HTMLElement>("#resource-empty");
+  const count = document.querySelector<HTMLElement>("#resource-count");
+
+  function updateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    search!.value = params.get("q") || "";
+    subject!.value = params.get("subject") || "";
+    topic!.value = params.get("topic") || "";
+    applyFilters(false);
+  }
+
+  function applyFilters(updateUrl = true) {
+    const query = search!.value.trim().toLowerCase();
+    const selectedSubject = subject!.value;
+    const selectedTopic = topic!.value;
+    let visible = 0;
+
+    for (const card of cards) {
+      const matches = card.dataset.title!.includes(query)
+        && (!selectedSubject || card.dataset.subject === selectedSubject)
+        && (!selectedTopic || card.dataset.topic === selectedTopic);
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    }
+
+    empty!.hidden = visible > 0;
+    count!.textContent = `${visible} ${visible === 1 ? "resource" : "resources"}`;
+    if (updateUrl) {
+      const params = new URLSearchParams();
+      if (query) params.set("q", query);
+      if (selectedSubject) params.set("subject", selectedSubject);
+      if (selectedTopic) params.set("topic", selectedTopic);
+      const queryString = params.toString();
+      history.replaceState(null, "", queryString ? `?${queryString}` : window.location.pathname);
+    }
+  }
+
+  form?.addEventListener("input", () => applyFilters());
+  form?.addEventListener("change", () => applyFilters());
+  document.querySelector("#clear-resource-filters")?.addEventListener("click", () => {
+    search!.value = "";
+    subject!.value = "";
+    topic!.value = "";
+    applyFilters();
+  });
+  document.querySelector("#empty-clear-filters")?.addEventListener("click", () => {
+    search!.value = "";
+    subject!.value = "";
+    topic!.value = "";
+    applyFilters();
+  });
+  updateFromUrl();
+</script>

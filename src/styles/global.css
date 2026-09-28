@@ -29,55 +29,55 @@
   --color-neutral-900: #19222f;
   --color-neutral-950: #10161f;
 
-  --color-primary: #2d6dc3;
-  --color-primary-rgb: 45, 109, 195;
-  --color-primary-strong: #0066ff;
-  --color-primary-dark: #2d6dc3;
-  --color-primary-light: #8fb9ff;
-  --color-primary-light-dark: #bcd8ff;
-  --color-primary-lighter: #6da7ff;
+  --color-primary: #14543b;
+  --color-primary-rgb: 20, 84, 59;
+  --color-primary-strong: #0d402c;
+  --color-primary-dark: #14543b;
+  --color-primary-light: #77b69a;
+  --color-primary-light-dark: #a6d3bd;
+  --color-primary-lighter: #2f805f;
   /* Article-specific variables */
   --color-primary-bg: var(--color-bg-primary-light);
   --color-primary-bg-light: var(--color-bg-secondary);
 
 
-  --color-btn-primary: #2d6dc3;
-  --color-btn-primary-hover: #0066ff;
-  --color-btn-primary-dark: #2871e9;
-  --color-btn-primary-dark-hover: #2d6dc3;
+  --color-btn-primary: #14543b;
+  --color-btn-primary-hover: #0d402c;
+  --color-btn-primary-dark: #276c50;
+  --color-btn-primary-dark-hover: #368361;
 
   /* Accent colors */
-  --color-accent: #fad13b;
-  --color-accent-light: #faeb75;
+  --color-accent: #d3a943;
+  --color-accent-light: #ecd58d;
 
   /* Background colors */
 
-  --color-bg-primary: #fdfaf5;
+  --color-bg-primary: #fbfcf9;
   --color-bg-secondary: #fff;
-  --color-bg-primary-light: #faf9f5;
-  --color-bg-primary-deep: #fefcf4;
+  --color-bg-primary-light: #f4f8f4;
+  --color-bg-primary-deep: #f7f8f1;
 
-  --color-bg-primary-dark: #0b1220;
-  --color-bg-secondary-dark: #0f1b2d;
+  --color-bg-primary-dark: #091b14;
+  --color-bg-secondary-dark: #10271d;
 
 
   /* Text colors */
-  --color-text-primary: #2d6dc3;
-  --color-text-secondary: #3f4a5a;
-  --color-text-tertiary: #7a6550;
+  --color-text-primary: #14543b;
+  --color-text-secondary: #34453c;
+  --color-text-tertiary: #73613a;
 
-  --color-text-primary-dark: #3884eb;
-  --color-text-secondary-dark: #c5cedb;
-  --color-text-tertiary-dark: #9bb3d7;
+  --color-text-primary-dark: #9bd0b2;
+  --color-text-secondary-dark: #d2ddd6;
+  --color-text-tertiary-dark: #dfc878;
 }
 
 /* Dark mode variable overrides */
 html.dark {
-  --color-primary-rgb: 56, 132, 235;
-  --color-primary-light-dark: #3884eb;
-  --color-primary-lighter: #8fb9ff;
-  --color-primary-bg: rgba(56, 132, 235, 0.15);
-  --color-primary-bg-light: rgba(56, 132, 235, 0.05);
+  --color-primary-rgb: 119, 182, 154;
+  --color-primary-light-dark: #77b69a;
+  --color-primary-lighter: #9bd0b2;
+  --color-primary-bg: rgba(119, 182, 154, 0.15);
+  --color-primary-bg-light: rgba(119, 182, 154, 0.05);
 }
 
 /* Add typography styles */

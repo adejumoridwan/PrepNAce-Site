@@ -4,6 +4,7 @@ import TopBg from "@/components/ui/TopBg.astro";
 import Footer from "@/components/sections/Footer.astro";
 import Header from "@/components/sections/Header.astro";
 import TrackGa from "@/components/widgets/TrackGa.astro";
+import { siteConfig } from "@/config/site.js";
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
@@ -24,14 +25,32 @@ import '../styles/article.css';
 import '../styles/article-enhancements.css';
 ---
 
-<html lang="">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
     <Meta
       title = {title}
       description = {description}
       keywords = {keywords}
+      url = {new URL(Astro.url.pathname, siteConfig.url).toString()}
     />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "EducationalOrganization",
+          name: siteConfig.name,
+          url: siteConfig.url,
+          description: siteConfig.description,
+          email: siteConfig.contact.email,
+        },
+        {
+          "@type": "WebSite",
+          name: siteConfig.name,
+          url: siteConfig.url,
+          description: siteConfig.description,
+        },
+      ],
+    })} />
     <TrackGa />
     <!-- Used to add dark mode right away, adding here prevents any flicker -->
     <script is:inline>

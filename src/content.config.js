@@ -14,6 +14,8 @@ const post = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		publishDate: z.coerce.date(),
+		author: z.string().default('PrepNAce'),
+		category: z.string().optional(),
 		read: z.number().optional(),
 		tags: z.array(z.string()).optional(),
 		img: z.string().optional(),

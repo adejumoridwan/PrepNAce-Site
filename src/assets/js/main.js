@@ -99,7 +99,13 @@ document.getElementById("darkToggle").addEventListener("click", () => {
 	}
 });
 
+document.getElementById("darkToggleMobile").addEventListener("click", () => {
+	document.getElementById("darkToggle").click();
+});
+
 function showDay(animate) {
+	document.getElementById("darkToggle").setAttribute("aria-pressed", "false");
+	document.getElementById("darkToggleMobile").setAttribute("aria-pressed", "false");
 	document.getElementById("sun").classList.remove("setting");
 	document.getElementById("moon").classList.remove("rising");
 
@@ -126,6 +132,8 @@ function showDay(animate) {
 }
 
 function showNight(animate) {
+	document.getElementById("darkToggle").setAttribute("aria-pressed", "true");
+	document.getElementById("darkToggleMobile").setAttribute("aria-pressed", "true");
 	document.getElementById("moon").classList.remove("setting");
 	document.getElementById("sun").classList.remove("rising");
 
@@ -169,12 +177,31 @@ function mobileMenuFunctionality() {
 	document.getElementById("closeMenu").addEventListener("click", () => {
 		closeMobileMenu();
 	});
+	document.addEventListener("click", (event) => {
+		const button = event.target.closest(".dropdown-toggle");
+		if (!button) return;
+
+		const wrapper = button.closest(".dropdown-wrapper");
+		const isOpen = wrapper.dataset.open === "true";
+		wrapper.dataset.open = String(!isOpen);
+		button.setAttribute("aria-expanded", String(!isOpen));
+	});
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape") {
+			closeMobileMenu();
+			document.querySelectorAll(".dropdown-wrapper[data-open='true']").forEach((wrapper) => {
+				wrapper.dataset.open = "false";
+				wrapper.querySelector(".dropdown-toggle").setAttribute("aria-expanded", "false");
+			});
+		}
+	});
 }
 
 window.openMobileMenu = () => {
 	document.getElementById("openMenu").classList.add("hidden");
 	document.getElementById("closeMenu").classList.remove("hidden");
 	document.getElementById("menu").classList.remove("hidden");
+	document.getElementById("openMenu").setAttribute("aria-expanded", "true");
 	document.getElementById("mobileMenuBackground").classList.add("opacity-0");
 	document.getElementById("mobileMenuBackground").classList.remove("hidden");
 
@@ -189,5 +216,6 @@ window.closeMobileMenu = () => {
 	document.getElementById("closeMenu").classList.add("hidden");
 	document.getElementById("openMenu").classList.remove("hidden");
 	document.getElementById("menu").classList.add("hidden");
+	document.getElementById("openMenu").setAttribute("aria-expanded", "false");
 	document.getElementById("mobileMenuBackground").classList.add("hidden");
 };

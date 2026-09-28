@@ -1,0 +1,28 @@
+---
+import { ArrowRight, BookOpen, ChartNoAxesColumnIncreasing, Target } from "@lucide/astro";
+import Layout from "@/layouts/Layout.astro";
+import ComingSoon from "@/components/ui/ComingSoon.astro";
+import { siteConfig } from "@/config/site.js";
+
+export function getStaticPaths() {
+  return siteConfig.products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const isAvailable = product.status === "available";
+---
+
+<Layout title={`${product.name} | PrepNAce`} description={product.description}>
+  {isAvailable ? <main class="site-container py-14 md:py-20">
+    <header class="max-w-3xl border-l-2 border-accent pl-6"><p class="text-xs font-semibold uppercase tracking-[0.12em] text-primary dark:text-primary-light">PrepNAce Product · Available</p><h1 class="mt-3 font-brand text-5xl text-neutral-900 dark:text-white">{product.name}</h1><p class="mt-5 text-base leading-8 text-neutral-600 dark:text-neutral-300">{product.description} Prepare for CBT examinations through regular practice and clearer insight into your progress.</p></header>
+    <section class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{[
+      { title: "Practise past questions", description: "Build familiarity with question formats across JAMB, WAEC and NECO.", icon: BookOpen },
+      { title: "Study by subject and topic", description: "Focus practice on the areas that matter to your learning plan.", icon: Target },
+      { title: "Track performance", description: "Review your results and identify topics that deserve more attention.", icon: ChartNoAxesColumnIncreasing },
+    ].map(({ title, description, icon: Icon }) => <article class="border border-neutral-200 p-5 dark:border-neutral-700"><Icon size={22} class="text-primary dark:text-primary-light" /><h2 class="mt-4 font-semibold text-neutral-900 dark:text-white">{title}</h2><p class="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">{description}</p></article>)}</section>
+    <a href="/contact/" class="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white">Ask about the app <ArrowRight size={16} /></a>
+  </main> : <ComingSoon name={product.name} description={product.description} returnUrl="/products/" />}
+</Layout>

@@ -1,245 +1,95 @@
 ---
+import { ArrowRight, Link, Mail, Send, Sparkles } from "@lucide/astro";
 import Layout from "@/layouts/Layout.astro";
-import Button from "@/components/ui/Button.astro";
-import { siteConfig } from "@/config/site";
-import { ArrowRight, Bug, Clock3, GitFork, LifeBuoy, Mail, MessageSquare, Send, Sparkles } from "@lucide/astro";
+import { siteConfig } from "@/config/site.js";
 
-const contactTopics = [
-  { value: "general", label: "General inquiry" },
-  { value: "sales", label: "Sales / pricing" },
-  { value: "partnership", label: "Partnership" },
-  { value: "support", label: "Customer support" },
-  { value: "bug", label: "Bug report" },
-];
-
-const channels = [
-  {
-    icon: Mail,
-    label: "Email",
-    text: siteConfig.mail,
-    href: `mailto:${siteConfig.mail}`,
-  },
-  {
-    icon: GitFork,
-    label: "GitHub",
-    text: "Open an issue",
-    href: siteConfig.social.github,
-  },
-  {
-    icon: MessageSquare,
-    label: "Twitter",
-    text: `@${siteConfig.social.twitterName}`,
-    href: siteConfig.social.twitter,
-  },
-];
-
-const expectations = [
-  { icon: Clock3, title: "Reply window", desc: "Most messages get a response within 1 business day." },
-  { icon: LifeBuoy, title: "Support context", desc: "Share your page, browser, and a short reproduction when reporting issues." },
-  { icon: Bug, title: "Template note", desc: "This form is UI-only until you connect your own backend." },
-];
+const socials = Object.entries(siteConfig.social).filter(([, url]) => Boolean(url));
+const formspreeEndpoint = (import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || "").trim();
 ---
 
-<Layout
-  title="Contact - RicoFast"
-  description="Have questions, feedback, or partnership ideas? We'd love to hear from you."
->
-  <main class="site-container py-12 md:py-20">
-    <section class="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)] lg:items-start">
-      <div data-aos="fade-up-xs" data-aos-once="true">
-        <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-medium text-primary dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-primary-light">
-          <Sparkles size={14} />
-          Contact
-        </p>
-        <h1 class="max-w-xl font-brand text-4xl leading-tight tracking-normal text-neutral-800 dark:text-neutral-100 sm:text-5xl lg:text-6xl">
-          Tell us what you are building.
-        </h1>
-        <p class="mt-5 max-w-lg text-base leading-8 text-neutral-600 dark:text-neutral-300">
-          Questions, feedback, partnership ideas, or bug reports are all welcome. Send the details and we will point you in the right direction.
-        </p>
-
-        <div class="mt-10 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-          {channels.map(({ icon: Icon, label, text, href }, index) => (
-            <a
-              href={href}
-              target={href.startsWith("http") ? "_blank" : "_self"}
-              class="group flex items-center gap-4 rounded-xl border border-neutral-200 bg-bg-secondary/75 p-4 transition-all hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-[0_14px_35px_rgba(25,34,47,0.08)] dark:border-neutral-700 dark:bg-bg-secondary-dark/75 dark:hover:border-primary-light/35 dark:hover:shadow-[0_14px_35px_rgba(0,0,0,0.22)]"
-              data-aos="fade-up-xs"
-              data-aos-delay={`${index * 100}`}
-              data-aos-once="true"
-            >
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-primary shadow-sm ring-1 ring-neutral-200/70 transition-colors group-hover:bg-primary group-hover:text-white dark:bg-neutral-900/60 dark:text-primary-light dark:ring-neutral-700 dark:group-hover:bg-primary-light dark:group-hover:text-neutral-950">
-                <Icon size={18} />
-              </span>
-              <span class="min-w-0">
-                <span class="block text-sm font-semibold text-neutral-800 dark:text-neutral-100">{label}</span>
-                <span class="mt-0.5 block truncate text-sm text-neutral-500 transition-colors group-hover:text-primary dark:text-neutral-400 dark:group-hover:text-primary-light">{text}</span>
-              </span>
-              <ArrowRight class="ml-auto h-4 w-4 shrink-0 text-neutral-300 transition-all group-hover:translate-x-1 group-hover:text-primary dark:text-neutral-600 dark:group-hover:text-primary-light" />
-            </a>
-          ))}
-        </div>
-
-        <div class="mt-8 border-y border-dashed border-neutral-200 py-6 dark:border-neutral-700" data-aos="fade-up-xs" data-aos-delay="200" data-aos-once="true">
-          <div class="grid gap-5">
-            {expectations.map(({ icon: Icon, title, desc }) => (
-              <div class="flex gap-3">
-                <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-lighter/10 text-neutral-800 dark:bg-primary-lighter/10 dark:text-neutral-400">
-                  <Icon size={16} /> 
-                </span>
-                <div>
-                  <h2 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100">{title}</h2>
-                  <p class="mt-1 text-sm leading-6 text-neutral-500 dark:text-neutral-400">{desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div class="mx-auto w-full max-w-xl lg:max-w-none" data-aos="fade-up-xs" data-aos-delay="100" data-aos-once="true">
-        <div class="rounded-2xl border border-neutral-200 bg-bg-secondary/85 p-5 shadow-[0_18px_60px_rgba(25,34,47,0.08)] backdrop-blur dark:border-neutral-700 dark:bg-bg-secondary-dark/85 dark:shadow-[0_18px_60px_rgba(0,0,0,0.22)] sm:p-8">
-          <div class="mb-7 flex flex-col gap-4 border-b border-dashed border-neutral-200 pb-6 dark:border-neutral-700 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <p class="text-xs font-medium uppercase tracking-[0.14em] text-primary dark:text-primary-light">Message</p>
-              <h2 class="mt-3 font-brand text-4xl tracking-normal text-neutral-800 dark:text-neutral-100">Start a conversation</h2>
-              <p class="mt-3 text-sm leading-6 text-neutral-500 dark:text-neutral-400">
-                The demo handler validates fields and shows a local success state.
-              </p>
-            </div>
-            <span class="inline-flex w-fit rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-medium text-primary dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-primary-light">
-              UI template
-            </span>
-          </div>
-
-          <form id="contact-form" class="space-y-5">
-            <div class="grid gap-5 sm:grid-cols-2">
-              <div>
-                <label for="name" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  autocomplete="name"
-                  required
-                  placeholder="Your full name"
-                  class="contact-field"
-                />
-              </div>
-
-              <div>
-                <label for="email" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  autocomplete="email"
-                  required
-                  placeholder="you@example.com"
-                  class="contact-field"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label for="subject" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Subject</label>
-              <select id="subject" name="subject" required class="contact-field">
-                <option value="">Select a topic</option>
-                {contactTopics.map((topic) => (
-                  <option value={topic.value}>{topic.label}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label for="message" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows="6"
-                placeholder="Share the goal, context, and anything we should know..."
-                class="contact-field resize-none"
-              ></textarea>
-            </div>
-
-            <div class="rounded-xl border border-dashed border-primary/20 bg-primary/5 p-4 text-sm leading-6 text-neutral-600 dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-neutral-300">
-              <strong class="font-semibold text-primary dark:text-primary-light">Demo form.</strong> Connect it to Resend, Formspree, Cloudflare Forms, or your own API before going live.
-            </div>
-
-            <div class="form-submit-btn">
-              <Button type="fill" className="w-full max-w-none justify-center" url="javascript:void(0);">
-                Send message <Send size={16} />
-              </Button>
-            </div>
-
-            <div id="form-success" class="hidden rounded-xl border border-green-200 bg-green-50 p-4 text-center text-sm font-medium text-green-700 dark:border-green-800 dark:bg-green-900/20 dark:text-green-300">
-              Thanks. Message received. We will reply within 1 business day.
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
+<Layout title="Contact PrepNAce" description="Contact PrepNAce about learning support, exam preparation, resources and partnerships.">
+  <main class="site-container py-14 md:py-20">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+      <section>
+        <p class="inline-flex items-center gap-2 border-l-2 border-accent pl-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary dark:text-primary-light"><Sparkles size={14} /> Contact</p>
+        <h1 class="mt-4 max-w-xl font-brand text-5xl leading-tight text-neutral-900 dark:text-white">Let’s talk about your learning goals.</h1>
+        <p class="mt-5 max-w-lg text-base leading-8 text-neutral-600 dark:text-neutral-300">Contact PrepNAce with general enquiries about teaching, exam preparation, study resources, products or partnerships.</p>
+        <a href={`mailto:${siteConfig.contact.email}`} class="mt-8 flex max-w-md items-center gap-4 border border-neutral-200 bg-white p-4 hover:border-primary/35 dark:border-neutral-700 dark:bg-bg-secondary-dark"><span class="flex h-10 w-10 items-center justify-center bg-primary/5 text-primary dark:text-primary-light"><Mail size={19} /></span><span><span class="block text-xs text-neutral-500 dark:text-neutral-400">Email</span><span class="mt-1 block text-sm font-semibold text-neutral-800 dark:text-neutral-100">{siteConfig.contact.email}</span></span><ArrowRight class="ml-auto text-neutral-400" size={16} /></a>
+        {siteConfig.contact.phone && <a href={`tel:${siteConfig.contact.phone}`} class="mt-3 block text-sm text-primary underline dark:text-primary-light">{siteConfig.contact.phone}</a>}
+        {siteConfig.contact.whatsapp && <a href={siteConfig.contact.whatsapp} target="_blank" rel="noopener noreferrer" class="mt-3 block text-sm text-primary underline dark:text-primary-light">Contact PrepNAce on WhatsApp</a>}
+        {socials.length > 0 && <div class="mt-8"><h2 class="text-sm font-semibold text-neutral-900 dark:text-white">Social media</h2><ul class="mt-3 flex flex-wrap gap-3">{socials.map(([name, url]) => <li><a href={url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border border-neutral-200 px-3 py-2 text-sm text-neutral-700 hover:border-primary dark:border-neutral-700 dark:text-neutral-200"><Link size={15} />{name[0].toUpperCase() + name.slice(1)}</a></li>)}</ul></div>}
+      </section>
+      <section class="border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-bg-secondary-dark sm:p-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-primary dark:text-primary-light">General Enquiries</p><h2 class="mt-2 font-brand text-3xl text-neutral-900 dark:text-white">Send a message</h2><p class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-300">{formspreeEndpoint ? "Your message will be sent directly to PrepNAce." : "Submitting opens a prefilled draft in your default email app. You can review and send it there."}</p>
+        <form id="contact-form" data-endpoint={formspreeEndpoint} data-email={siteConfig.contact.email} class="mt-7 space-y-5">
+          <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="grid gap-5 sm:grid-cols-2"><div><label for="name" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-200">Name</label><input id="name" name="name" autocomplete="name" required class="contact-field" /></div><div><label for="email" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-200">Email</label><input id="email" name="email" type="email" autocomplete="email" required class="contact-field" /></div></div>
+          <div><label for="subject" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-200">Subject</label><select id="subject" name="subject" required class="contact-field"><option value="">Choose a topic</option><option>Teaching & Coaching</option><option>Exam Preparation</option><option>Learning Resources</option><option>Products</option><option>Partnership</option><option>General Enquiry</option></select></div>
+          <div><label for="message" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-200">Message</label><textarea id="message" name="message" rows="5" required class="contact-field"></textarea></div>
+          <button id="contact-submit" type="submit" aria-busy="false" class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white hover:bg-primary-strong disabled:cursor-wait disabled:opacity-60"><span id="contact-submit-label">{formspreeEndpoint ? "Send Message" : "Open Email Draft"}</span><Send size={15} /></button>
+          <p id="contact-status" class="hidden text-sm" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
   </main>
 </Layout>
 
 <style>
-  .contact-field {
-    width: 100%;
-    border-radius: 0.75rem;
-    border: 1px solid var(--color-neutral-200);
-    background: color-mix(in srgb, var(--color-bg-secondary) 82%, transparent);
-    padding: 0.875rem 1rem;
-    color: var(--color-neutral-800);
-    outline: none;
-    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
-  }
-
-  .contact-field::placeholder {
-    color: var(--color-neutral-400);
-  }
-
-  .contact-field:focus {
-    border-color: var(--color-primary);
-    background: var(--color-bg-secondary);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 22%, transparent);
-  }
-
-  :global(.dark) .contact-field {
-    border-color: var(--color-neutral-700);
-    background: color-mix(in srgb, var(--color-bg-secondary-dark) 82%, transparent);
-    color: var(--color-neutral-100);
-  }
-
-  :global(.dark) .contact-field::placeholder {
-    color: var(--color-neutral-500);
-  }
-
-  :global(.dark) .contact-field:focus {
-    border-color: var(--color-primary-light);
-    background: var(--color-bg-secondary-dark);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-light) 18%, transparent);
-  }
+  .contact-field { width: 100%; border: 1px solid var(--color-neutral-300); background: var(--color-bg-secondary); padding: 0.75rem 0.875rem; color: var(--color-neutral-800); outline: none; }
+  .contact-field:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent); }
+  :global(.dark) .contact-field { border-color: var(--color-neutral-700); background: var(--color-bg-primary-dark); color: var(--color-neutral-100); }
 </style>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const successMsg = document.getElementById('form-success');
-  const submitBtn = form?.querySelector('.form-submit-btn a') as HTMLAnchorElement | null;
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const status = document.querySelector<HTMLElement>("#contact-status");
+  const submitButton = document.querySelector<HTMLButtonElement>("#contact-submit");
+  const submitLabel = document.querySelector<HTMLElement>("#contact-submit-label");
+  const contactEmail = form?.dataset.email || "";
 
-  submitBtn?.addEventListener('click', (event) => {
+  function showStatus(message: string, isError = false) {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("hidden", !message);
+    status.classList.toggle("text-red-700", isError);
+    status.classList.toggle("dark:text-red-300", isError);
+    status.classList.toggle("text-primary", !isError);
+    status.classList.toggle("dark:text-primary-light", !isError);
+  }
+
+  form?.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (!form.reportValidity()) return;
 
-    if (!form?.checkValidity()) {
-      form?.reportValidity();
+    const endpoint = form.dataset.endpoint;
+    if (!endpoint) {
+      const data = new FormData(form);
+      const subject = encodeURIComponent(`[PrepNAce] ${data.get("subject")}`);
+      const body = encodeURIComponent(`Name: ${data.get("name")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`);
+      window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
       return;
     }
 
-    successMsg?.classList.remove('hidden');
-    form.reset();
+    showStatus("");
+    submitButton!.disabled = true;
+    submitButton!.setAttribute("aria-busy", "true");
+    submitLabel!.textContent = "Sending...";
 
-    setTimeout(() => {
-      successMsg?.classList.add('hidden');
-    }, 5000);
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok) throw new Error("Formspree submission failed");
+      form.reset();
+      showStatus("Thanks. Your message has been sent.");
+    } catch {
+      showStatus(`We could not send your message. Please try again or email ${contactEmail}.`, true);
+    } finally {
+      submitButton!.disabled = false;
+      submitButton!.setAttribute("aria-busy", "false");
+      submitLabel!.textContent = "Send Message";
+    }
   });
 </script>

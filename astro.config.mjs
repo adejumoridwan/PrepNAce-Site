@@ -8,12 +8,26 @@ import path from "path";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Get the site URL from environment variables, or use the default value if not set
 // Note: After the first deployment, be sure to set the correct PUBLIC_SITE_URL in the .env file
-const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://ricofast.pages.dev/';
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://prepnace.online';
 
 // https://astro.build/config
 export default defineConfig({
   site: siteUrl,
   base: '/',
+  redirects: {
+    '/features': '/teaching-coaching/',
+    '/pricing': '/contact/',
+    '/changelog': '/blog/',
+    '/elements': '/resources/',
+    '/sign-in': '/',
+    '/sign-up': '/',
+    '/signin': '/',
+    '/signup': '/',
+    '/businesses': '/products/',
+    '/businesses/store': '/products/store/',
+    '/businesses/skills': '/products/skills/',
+    '/businesses/opportunity': '/products/opportunity/',
+  },
   envPrefix: 'PUBLIC_',
   vite: {
     plugins: [tailwindcss()],
