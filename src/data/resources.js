@@ -13,7 +13,7 @@ export const resources = [
     subject: "Cheatsheets",
     topic: "Physics",
     description: "A quick reference guide for electrical concepts.",
-    file: "/resources/electricity_cheatsheet_colour.pdf"
+    file: "/resources/Electricity.pdf"
   },
     {
     slug: "physics-cheatsheet",
@@ -21,7 +21,7 @@ export const resources = [
     subject: "Cheatsheets",
     topic: "Physics",
     description: "A quick reference guide for physics concepts.",
-    file: "/resources/physics_cheatsheet_colour.pdf"
+    file: "/resources/physics_cheatsheet.pdf"
   },
     {
     slug: "organic-chemistry-cheatsheet",
@@ -29,6 +29,6 @@ export const resources = [
     subject: "Cheatsheets",
     topic: "Chemistry",
     description: "A quick reference guide for organic chemistry concepts.",
-    file: "/resources/organic_chemistry_cheatsheet_colour.pdf"
+    file: "/resources/PrepNAce_Organic_Chemistry_Cheatsheet.pdf"
   }
 ];
