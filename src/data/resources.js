@@ -49,7 +49,7 @@ export const resources = [
    },
    {
     slug: "vowels",
-    title: "Vowels",
+    title: "Vowels Cheatsheets",
     subject: "Cheatsheets",
     topic: "English",
     description: "A quick reference guide for vowels.",

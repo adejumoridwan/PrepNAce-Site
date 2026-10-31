@@ -1,1 +1,1 @@
-pnpm --package=netlify-cli dlx netlify deploy --dir=dist --prod
+npx --yes netlify-cli deploy --dir=dist --prod
