@@ -5,7 +5,7 @@ export const resources = [
     subject: "Cheatsheets",
     topic: "Mathematics",
     description: "A quick reference guide for algebraic concepts.",
-    file: "/resources/algebra_cheatsheet_colour.pdf"
+    file: "/resources/mathematics/algebra_cheatsheet_colour.pdf"
   },
     {
     slug: "electricity-cheatsheet",
@@ -13,7 +13,7 @@ export const resources = [
     subject: "Cheatsheets",
     topic: "Physics",
     description: "A quick reference guide for electrical concepts.",
-    file: "/resources/Electricity.pdf"
+    file: "/resources/physics/Electricity.pdf"
   },
     {
     slug: "physics-cheatsheet",
@@ -21,7 +21,7 @@ export const resources = [
     subject: "Cheatsheets",
     topic: "Physics",
     description: "A quick reference guide for physics concepts.",
-    file: "/resources/physics_cheatsheet.pdf"
+    file: "/resources/physics/physics_cheatsheet.pdf"
   },
     {
     slug: "organic-chemistry-cheatsheet",
@@ -29,6 +29,30 @@ export const resources = [
     subject: "Cheatsheets",
     topic: "Chemistry",
     description: "A quick reference guide for organic chemistry concepts.",
-    file: "/resources/PrepNAce_Organic_Chemistry_Cheatsheet.pdf"
-  }
+    file: "/resources/chemistry/PrepNAce_Organic_Chemistry_Cheatsheet.pdf"
+  },
+   {
+    slug: "trigonometry-cheatsheet",
+    title: "Trigonometry Cheatsheet",
+    subject: "Cheatsheets",
+    topic: "Mathematics",
+    description: "A quick reference guide for trigonometric concepts.",
+    file: "/resources/mathematics/trigonometry_cheatsheet.pdf"
+   },
+   {
+    slug: "projectiles-cheatsheet",
+    title: "Projectiles Cheatsheet",
+    subject: "Cheatsheets",
+    topic: "Physics",
+    description: "A quick reference guide for projectile motion concepts.",
+    file: "/resources/physics/projectiles.pdf"
+   },
+   {
+    slug: "vowels",
+    title: "Vowels",
+    subject: "Cheatsheets",
+    topic: "English",
+    description: "A quick reference guide for vowels.",
+    file: "/resources/english/vowels.pdf"
+   }
 ];
