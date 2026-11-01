@@ -54,5 +54,13 @@ export const resources = [
     topic: "English",
     description: "A quick reference guide for vowels.",
     file: "/resources/english/vowels.pdf"
+   },
+   {
+    slug: "sets-cheatsheet",
+    title: "Sets Cheatsheet",
+    subject: "Cheatsheets",
+    topic: "Mathematics",
+    description: "A quick reference guide for set theory concepts.",
+    file: "/resources/mathematics/sets_cheatsheet.pdf"
    }
 ];
