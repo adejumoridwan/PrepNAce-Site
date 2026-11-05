@@ -62,5 +62,13 @@ export const resources = [
     topic: "Mathematics",
     description: "A quick reference guide for set theory concepts.",
     file: "/resources/mathematics/sets_cheatsheet.pdf"
+   },
+   {
+    slug: "nutrient-cycling-cheatsheet",
+    title: "Nutrient Cycling Cheatsheet",
+    subject: "Cheatsheets",
+    topic: "Biology",
+    description: "A quick reference guide for nutrient cycling concepts.",
+    file: "/resources/biology/nutrient_cycling_cheatsheet.pdf"
    }
 ];
