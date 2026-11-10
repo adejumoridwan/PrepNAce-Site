@@ -80,6 +80,7 @@ export const siteConfig = {
 			children: products.map(({ name, slug, url, status }) => ({ name, url: status === 'available' ? url : `/products/${slug}/` })),
 		},
 		{ name: 'Resources', url: '/resources/' },
+		{ name: 'Community', url: '/community/' },
 		{ name: 'Blog', url: '/blog/' },
 		{ name: 'Contact', url: '/contact/' },
 	],

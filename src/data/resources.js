@@ -70,5 +70,13 @@ export const resources = [
     topic: "Biology",
     description: "A quick reference guide for nutrient cycling concepts.",
     file: "/resources/biology/nutrient_cycling_cheatsheet.pdf"
+   },
+   {
+    slug: "nuclear-physics-cheatsheet",
+    title: "Nuclear Physics Cheatsheet",
+    subject: "Cheatsheets",
+    topic: "Physics",
+    description: "A quick reference guide for nuclear physics concepts.",
+    file: "/resources/physics/prepnace_nuclear_physics_cheatsheet.pdf"
    }
 ];

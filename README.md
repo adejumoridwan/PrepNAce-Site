@@ -7,13 +7,27 @@ PrepNAce is an education and student-development website built with Astro. It br
 
 ## Development
 
-Requirements: Node.js `>=22.12.0` and pnpm `>=9`.
+Requirements: Node.js `>=22.12.0` and pnpm `>=9`. This project pins pnpm
+`9.14.2` in `package.json`. If your terminal says `pnpm: command not found`,
+run pnpm through Corepack. This avoids needing permission to create a global
+pnpm symlink:
 
 ```bash
-pnpm install
-pnpm dev
-pnpm build
-pnpm preview
+corepack pnpm install
+```
+
+Start the development server:
+
+```bash
+corepack pnpm dev
+```
+
+To check a production build and preview it locally, stop the dev server first,
+then run:
+
+```bash
+corepack pnpm build
+corepack pnpm preview
 ```
 
 The development server uses port `5200`. Set `PUBLIC_SITE_URL` to the canonical production site origin before deployment. Analytics environment variables are optional.
