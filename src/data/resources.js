@@ -78,5 +78,13 @@ export const resources = [
     topic: "Physics",
     description: "A quick reference guide for nuclear physics concepts.",
     file: "/resources/physics/prepnace_nuclear_physics_cheatsheet.pdf"
+   },
+   {
+       slug: "oxidation-and-reduction",
+        title: "Oxidation and Reduction Cheatsheet",
+        subject: "Cheatsheets",
+        topic: "Chemistry",
+        description: "A quick reference guide for oxidation and reduction concepts.",
+        file: "/resources/chemistry/PrepNAce_Oxidation_Reduction_Cheatsheet.pdf"
    }
 ];
