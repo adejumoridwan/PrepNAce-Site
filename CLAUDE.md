@@ -60,7 +60,7 @@ Old SaaS-template routes redirect to relevant PrepNAce pages or home through `as
 
 - Add/edit products only in `src/config/site.js`. Keep each stable `slug`, description, destination URL, and `status` together.
 - Coming-soon destinations use an empty `url`; the UI routes to its generated local detail page. When a destination is real, set its URL and change status to `available`.
-- Products include PrepNAce Mobile App, PrepNAce POST-UTME, CountDown, PrepNAce Store, PrepNAce Skills, and PrepNAce Opportunity.
+- Products include PrepNAce App, PrepNAce POST-UTME, CountDown, PrepNAce Store, PrepNAce Skills, and PrepNAce Opportunity.
 - Social URLs start empty. Render social links only when configured. External links use `target="_blank"` with `rel="noopener noreferrer"`.
 - Add a PDF under `public/resources/` and one metadata entry to `src/data/resources.js`. Do not invent or link to files that do not exist. Resource filters are static and serialize filters in URL query parameters.
 - Blog posts use `src/content/post/`; add title, description, publish date, author, category, tags, optional image and reading time.

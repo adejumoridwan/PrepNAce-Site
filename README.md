@@ -38,7 +38,7 @@ The development server uses port `5200`. Set `PUBLIC_SITE_URL` to the canonical 
 
 Edit the centralized product catalog in `src/config/site.js`. A coming-soon item should have an empty `url` and `status: "coming-soon"`; its local detail route is generated from its stable `slug`. When an actual destination is ready, set its URL and `status: "available"`.
 
-Products are PrepNAce Mobile App, PrepNAce POST-UTME, CountDown, PrepNAce Store, PrepNAce Skills and PrepNAce Opportunity.
+Products are PrepNAce App, PrepNAce POST-UTME, CountDown, PrepNAce Store, PrepNAce Skills and PrepNAce Opportunity.
 
 ### PDF resources
 

@@ -31,7 +31,7 @@ Retired template routes redirect in `astro.config.mjs`.
 
 Products:
 
-- PrepNAce Mobile App - Available
+- PrepNAce App - Available
 - PrepNAce POST-UTME - Coming Soon
 - CountDown - Coming Soon
 - PrepNAce Store - Coming Soon

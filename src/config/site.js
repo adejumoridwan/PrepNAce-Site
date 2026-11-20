@@ -1,7 +1,7 @@
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://prepnace.com';
 const products = [
 	{
-		name: 'PrepNAce Mobile App',
+		name: 'PrepNAce App',
 		slug: 'mobile-app',
 		description: 'Practice JAMB, WAEC and NECO past questions and track your performance.',
 		url: '/products/mobile-app/',
