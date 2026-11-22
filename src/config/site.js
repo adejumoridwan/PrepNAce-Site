@@ -61,7 +61,7 @@ export const siteConfig = {
 		title: 'PrepNAce | Academic Excellence & Success',
 		description: 'PrepNAce helps students learn, prepare for examinations, develop useful skills and achieve their academic goals.',
 		keywords: 'PrepNAce, academic coaching, exam preparation, JAMB, WAEC, NECO, learning resources',
-		image: '',
+		image: `${SITE_URL}/assets/prepnace-logo.png`,
 		twitterHandle: '',
 	},
 	social: {

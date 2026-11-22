@@ -1,15 +1,23 @@
 ---
 const GAID = import.meta.env.PUBLIC_GA4_ID;
+const GTMID = import.meta.env.PUBLIC_GTM_ID || (GAID?.startsWith("GTM-") ? GAID : "");
 const UMAMIId = import.meta.env.PUBLIC_UMAMI_ID;
-// const GAID = '';
 
-if (!GAID) {
-    // console.error("Google Analytics ID (PUBLIC_GA4_ID) is missing!");
-}
 ---
 
+{GTMID && (
+    <>
+      <script is:inline async src={`https://www.googletagmanager.com/gtm.js?id=${GTMID}`}></script>
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      </script>
+    </>
+)}
+
 <!-- GA4 跟踪代码 -->
-{GAID && (
+{GAID && !GTMID && (
     <>
       <script  is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GAID}`} ></script>
       <script  is:inline define:vars={{ GAID }}>
