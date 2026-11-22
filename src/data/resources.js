@@ -86,5 +86,13 @@ export const resources = [
         topic: "Chemistry",
         description: "A quick reference guide for oxidation and reduction concepts.",
         file: "/resources/chemistry/PrepNAce_Oxidation_Reduction_Cheatsheet.pdf"
+   },
+   {
+    slug: "differentiation-cheatsheet",
+    title: "Differentiation Cheatsheet",
+    subject: "Cheatsheets",
+    topic: "Mathematics",
+    description: "A quick reference guide for differentiation concepts.",
+    file: "/resources/mathematics/PrepNAce_Differentiation_Cheatsheet.pdf"
    }
 ];
