@@ -64,6 +64,13 @@ export const siteConfig = {
 		image: `${SITE_URL}/assets/prepnace-logo.png`,
 		twitterHandle: '',
 	},
+	appDownloads: {
+		android: '/downloads/prepnace-android.apk',
+		windows: '/downloads/prepnace-windows.exe',
+		ios: '',
+		playStore: '',
+		windowsStore: '',
+	},
 	social: {
 		tiktok: '',
 		youtube: '',

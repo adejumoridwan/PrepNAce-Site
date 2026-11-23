@@ -1,7 +1,8 @@
 ---
-import { ArrowRight, BookOpen, ChartNoAxesColumnIncreasing, Target } from "@lucide/astro";
+import { BookOpen, ChartNoAxesColumnIncreasing, Target } from "@lucide/astro";
 import Layout from "@/layouts/Layout.astro";
 import ComingSoon from "@/components/ui/ComingSoon.astro";
+import AppDownloadDropdown from "@/components/ui/AppDownloadDropdown.astro";
 import { siteConfig } from "@/config/site.js";
 
 export function getStaticPaths() {
@@ -23,6 +24,6 @@ const isAvailable = product.status === "available";
       { title: "Study by subject and topic", description: "Focus practice on the areas that matter to your learning plan.", icon: Target },
       { title: "Track performance", description: "Review your results and identify topics that deserve more attention.", icon: ChartNoAxesColumnIncreasing },
     ].map(({ title, description, icon: Icon }) => <article class="border border-neutral-200 p-5 dark:border-neutral-700"><Icon size={22} class="text-primary dark:text-primary-light" /><h2 class="mt-4 font-semibold text-neutral-900 dark:text-white">{title}</h2><p class="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">{description}</p></article>)}</section>
-    <a href="/contact/" class="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white">Ask about the app <ArrowRight size={16} /></a>
+    <AppDownloadDropdown className="mt-10" />
   </main> : <ComingSoon name={product.name} description={product.description} returnUrl="/products/" />}
 </Layout>

@@ -1,0 +1,35 @@
+---
+import { ArrowDownToLine, ChevronDown } from "@lucide/astro";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { siteConfig } from "@/config/site.js";
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+const options = [
+  { label: "Android (APK)", url: siteConfig.appDownloads.android, file: true },
+  { label: "Windows (EXE)", url: siteConfig.appDownloads.windows, file: true },
+  { label: "iOS App Store", url: siteConfig.appDownloads.ios, file: false },
+  { label: "Google Play Store", url: siteConfig.appDownloads.playStore, file: false },
+  { label: "Windows Store", url: siteConfig.appDownloads.windowsStore, file: false },
+].map((option) => ({
+  ...option,
+  available: option.file
+    ? existsSync(join(process.cwd(), "public", option.url.slice(1)))
+    : Boolean(option.url),
+}));
+---
+
+<details class:list={["group relative w-fit", className]}>
+  <summary class="inline-flex cursor-pointer list-none items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+    <ArrowDownToLine size={16} /> Download <ChevronDown size={16} class="transition-transform group-open:rotate-180" />
+  </summary>
+  <div class="absolute left-0 top-full z-20 mt-2 flex min-w-56 flex-col border border-primary/15 bg-white p-1 shadow-lg dark:border-neutral-700 dark:bg-bg-secondary-dark">
+    {options.map((option) => option.available
+      ? <a href={option.url} download={option.file || undefined} target={option.file ? undefined : "_blank"} rel={option.file ? undefined : "noopener noreferrer"} class="flex items-center justify-between gap-5 px-3 py-2.5 text-sm text-neutral-700 hover:bg-primary/5 hover:text-primary focus-visible:bg-primary/5 focus-visible:outline-none dark:text-neutral-200 dark:hover:bg-primary/10 dark:hover:text-primary-light"><span>{option.label}</span><ArrowDownToLine size={15} class="shrink-0 text-primary dark:text-primary-light" /></a>
+      : <span aria-disabled="true" class="flex items-center justify-between gap-5 px-3 py-2.5 text-sm text-neutral-400 dark:text-neutral-500"><span>{option.label}</span><span class="shrink-0 text-xs">Coming Soon</span></span>)}
+  </div>
+</details>
