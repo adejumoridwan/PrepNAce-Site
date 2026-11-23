@@ -54,8 +54,8 @@ export const siteConfig = {
 	mail: 'adejumo999@gmail.com',
 	contact: {
 		email: 'adejumo999@gmail.com',
-		whatsapp: '',
-		phone: '',
+		whatsapp: '+2349021138475',
+		phone: '+2349021138475',
 	},
 	meta: {
 		title: 'PrepNAce | Academic Excellence & Success',
@@ -65,7 +65,7 @@ export const siteConfig = {
 		twitterHandle: '',
 	},
 	appDownloads: {
-		android: '/downloads/prepnace-android.apk',
+		android: '/downloads/prepnace-android-apk.zip',
 		windows: '/downloads/prepnace-windows.exe',
 		ios: '',
 		playStore: '',
