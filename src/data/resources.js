@@ -94,5 +94,13 @@ export const resources = [
     topic: "Mathematics",
     description: "A quick reference guide for differentiation concepts.",
     file: "/resources/mathematics/PrepNAce_Differentiation_Cheatsheet.pdf"
+   },
+   {
+    slug: "number-bases-and-modular-arithmetic",
+    title: "Number Bases and Modular Arithmetic",
+    subject: "Mathematics",
+    topic: "Number Bases and Modular Arithmetic",
+    description: "A quick reference guide for number bases and modular arithmetic concepts.",
+    file: "/resources/mathematics/number_bases.pdf"
    }
 ];
