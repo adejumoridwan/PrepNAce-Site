@@ -101,6 +101,6 @@ export const resources = [
     subject: "Mathematics",
     topic: "Number Bases and Modular Arithmetic",
     description: "A quick reference guide for number bases and modular arithmetic concepts.",
-    file: "/resources/mathematics/number_bases.pdf"
+    file: "/resources/mathematics/1_number_bases.pdf"
    }
 ];
